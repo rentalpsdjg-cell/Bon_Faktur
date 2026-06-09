@@ -74,7 +74,7 @@
     .input-group input { 
       width: 100%; 
       padding: 10px; 
-      font-size: 14px;
+      font-size: 14px; 
       border: 1px solid #ccc; 
       border-radius: 6px; 
       background-color: #fafafa;
@@ -138,20 +138,14 @@
     .btn-submit:disabled { background-color: #9e9e9e; }
     .footer-note { font-size: 11px; color: #777; text-align: center; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px; }
 
-    /* ======================================================= */
-    /* AREA STRUK HIDDEN SECARA DEFAULT DI LAYAR HP KASIR       */
-    /* ======================================================= */
+    /* AREA STRUK HIDDEN SECARA DEFAULT DI LAYAR HP KASIR */
     #area-cetak-struk { display: none; }
 
-    /* ======================================================= */
-    /* PENGATURAN KHUSUS PRINT OUT: TEBAL & TEKS MURNI (58mm)   */
-    /* ======================================================= */
+    /* PENGATURAN KHUSUS PRINT OUT: TEBAL & TEKS MURNI (58mm) */
     @media print {
-      /* Sembunyikan semua elemen aplikasi di layar HP */
       body { background: #fff; color: #000; font-weight: bold; }
       .header-bar, .container, .add-form, .btn-submit, .footer-note { display: none !important; }
       
-      /* Tampilkan hanya area struk dengan format teks murni & tebal */
       #area-cetak-struk { 
         display: block !important; 
         width: 54mm; 
@@ -166,7 +160,6 @@
       }
       @page { size: 58mm auto; margin: 0; }
       
-      /* Pembatas menggunakan teks strip murni, bukan border CSS, agar pasti tercetak tebal */
       .line-print { 
         font-size: 12px;
         font-weight: bold;
@@ -177,7 +170,6 @@
       .c-print { text-align: center; font-weight: 900; }
       .r-print { text-align: right; font-weight: 900; }
       
-      /* Tabel struk tanpa garis border sama sekali (Murni Teks Luas) */
       table.tabel-struk { width: 100%; border: none; font-size: 12px; font-weight: 900; }
       table.tabel-struk td { border: none !important; padding: 2px 0; font-weight: 900; }
     }
@@ -315,7 +307,6 @@
       var pelanggan = document.getElementById('pelanggan').value || "Umum";
       var paketData = daftarBarang.map(b => ({ nama: b.nama, qty: b.qty, harga: b.harga }));
 
-      // URL Web App Google Apps Script Aktif Anda
       var urlWebApp = "https://script.google.com/macros/s/AKfycbxofhJcs6THJWJ4afCROQy_8fap9lPY6mA7w0qdUaVprhTZ9uuBQR_F0fcW41HGbgnH/exec";
 
       fetch(urlWebApp, {
@@ -335,18 +326,15 @@
           
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
-            // Ditulis murni baris teks demi kecepatan & ketajaman printer kasir
             pTabel.innerHTML += `<tr><td colspan="2"><b>${item.nama.toUpperCase()}</b></td></tr>
                                  <tr><td>${item.qty} x ${item.harga.toLocaleString('id-ID')}</td><td class="r-print">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
           });
           
           document.getElementById('p-grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
 
-          // Picu dialog print Android
           setTimeout(function() {
             window.print();
             
-            // Reset setelah print sukses
             daftarBarang = [];
             renderTabel();
             document.getElementById('pelanggan').value = "";
