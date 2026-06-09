@@ -25,7 +25,7 @@
     }
     
     .header-bar { 
-      background: #022c22; /* Emerald Gelap Mewah */
+      background: #022c22; 
       color: #f8fafc; 
       padding: 20px; 
       font-size: 20px; 
@@ -85,7 +85,6 @@
       .meta-grid { grid-template-columns: 1fr 1fr; }
     }
     
-    .input-group { position: relative; }
     .input-group label { 
       display: block; 
       font-size: 11px; 
@@ -135,9 +134,7 @@
       font-size: 14px;
       border: 1px solid #cbd5e1;
       border-radius: 10px;
-      background: #fff;
     }
-    .add-grid input:focus { border-color: #059669; outline: none; }
     
     .btn-add { 
       background-color: #022c22; 
@@ -150,9 +147,7 @@
       font-weight: 600;
       cursor: pointer; 
       margin-top: 12px; 
-      transition: all 0.2s;
     }
-    .btn-add:active { background-color: #064e3b; transform: scale(0.98); }
     
     .total-box {
       background: #022c22;
@@ -163,8 +158,8 @@
       align-items: center;
       color: white;
     }
-    .total-title { font-size: 12px; font-weight: 600; color: #a7f3d0; letter-spacing: 0.5px; }
-    .total-amount { font-size: 22px; font-weight: 700; color: #ffffff; }
+    .total-title { font-size: 12px; font-weight: 600; color: #a7f3d0; }
+    .total-amount { font-size: 22px; font-weight: 700; }
 
     .btn-submit { 
       background: #dc2626;
@@ -178,11 +173,8 @@
       cursor: pointer; 
       margin-top: 14px; 
       box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
-      transition: all 0.2s;
     }
-    .btn-submit:active { transform: scale(0.98); }
-    .btn-submit:disabled { background: #cbd5e1; box-shadow: none; color: #94a3b8; cursor: not-allowed; }
-    
+    .btn-submit:disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
     .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 20px; line-height: 1.5; }
 
     /* ======================================================= */
@@ -191,47 +183,58 @@
     #area-cetak-struk { display: none; }
 
     /* ======================================================= */
-    /* OPTIMASI TOTAL PRINT: SUPER BOLD, TEKS MURNI, BESAR     */
+    /* PERSKALAAN KHUSUS PRINTER THERMAL MINI 58MM             */
     /* ======================================================= */
     @media print {
-      body { background: #fff; color: #000; }
-      .header-bar, .container, #area-cetak-struk + button { display: none !important; }
+      /* Sembunyikan semua elemen UI layar handphone */
+      body { background: #fff; color: #000; margin: 0; padding: 0; }
+      .header-bar, .container { display: none !important; }
       
       #area-cetak-struk { 
         display: block !important; 
-        width: 54mm; 
+        width: 48mm;             /* Batas lebar cetak efektif kertas 58mm agar sisi kanan tidak terpotong */
+        max-width: 48mm;
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 15px;         /* Diperbesar agar teks terlihat besar mantap */
+        font-size: 13px;         /* Ukuran font besar proporsional untuk kertas 58mm */
         font-weight: 900;        /* Ketebalan cetak maksimum hitam pekat */
-        line-height: 1.4;
-        margin: 0;
-        padding: 0;
+        line-height: 1.3;
+        margin: 0 auto;
+        padding: 0 2mm;          /* Safety padding kanan kiri */
         background: #fff;
         color: #000;
-        text-transform: uppercase; /* Otomatis tulisan menjadi kapital */
-      }
-      @page { size: 58mm auto; margin: 0; }
-      
-      .line-print { 
-        font-size: 15px;
-        font-weight: 900;
-        margin: 6px 0;
-        white-space: nowrap;
+        text-transform: uppercase; 
         overflow: hidden;
       }
+      
+      @page { 
+        size: 58mm auto;         /* Spesifikasi ukuran kertas thermal mini */
+        margin: 0;               /* Menghilangkan margin browser/sistem android */
+      }
+      
+      .line-print { 
+        font-size: 13px;
+        font-weight: 900;
+        margin: 4px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        letter-spacing: -0.5px;
+      }
+      
       .c-print { text-align: center; font-weight: 900; }
       
-      /* Struktur baris murni teks, aman bebas eror printer */
       .row-print {
         display: flex;
         justify-content: space-between;
         font-weight: 900;
-        padding: 2px 0;
+        padding: 1px 0;
+        width: 100%;
       }
+      
       .item-name-print {
         font-weight: 900;
         display: block;
-        padding-top: 5px;
+        padding-top: 4px;
+        word-wrap: break-word; /* Jika nama barang panjang, otomatis turun dengan rapi */
       }
     }
   </style>
@@ -244,7 +247,6 @@
   </div>
 
   <div class="container">
-    
     <div class="card-luxury">
       <span class="section-title">Data Transaksi</span>
       <div class="meta-grid">
@@ -283,46 +285,44 @@
     </div>
 
     <button class="btn-submit" id="btnProses" onclick="simpanDanCetakNota()">PROSES & CETAK STRUK</button>
-    
     <div class="footer-note">Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
   </div>
 
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <span style="font-size: 18px; font-weight: 900;">DODI JAYA GAME</span><br>
-      <span>GUNUNG LAGAN, ACEH SINGKIL</span><br>
-      <span id="p-waktu"></span>
+      <span style="font-size: 15px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span style="font-size: 11px;">GUNUNG LAGAN, ACEH SINGKIL</span><br>
+      <span id="p-waktu" style="font-size: 11px;"></span>
     </div>
     
-    <div class="line-print">============================</div>
+    <div class="line-print">======================</div>
     
-    <div>
+    <div style="font-size: 12px;">
       PELANGGAN: <span id="p-pelanggan"></span><br>
       NO NOTA  : <span id="p-faktur"></span>
     </div>
     
-    <div class="line-print">============================</div>
+    <div class="line-print">======================</div>
     
     <div id="p-tabel-barang"></div>
     
-    <div class="line-print">============================</div>
+    <div class="line-print">======================</div>
     
-    <div class="row-print" style="font-size: 16px;">
+    <div class="row-print" style="font-size: 14px;">
       <span>TOTAL:</span>
       <span id="p-grand-total"></span>
     </div>
     
-    <div class="line-print">============================</div>
+    <div class="line-print">======================</div>
     
-    <div class="c-print" style="margin-top: 8px;">
+    <div class="c-print" style="margin-top: 6px; font-size: 11px;">
       TERIMA KASIH<br>
       ATAS KUNJUNGAN ANDA
     </div>
   </div>
 
   <script>
-    // Ambil tanggal otomatis hari ini
     var tgl = new Date();
     document.getElementById('tanggal').value = ("0" + tgl.getDate()).slice(-2) + '-' + ("0" + (tgl.getMonth()+1)).slice(-2) + '-' + tgl.getFullYear();
 
@@ -341,7 +341,6 @@
       var total = qty * harga;
       daftarBarang.push({ nama: nama, qty: qty, harga: harga, total: total });
       
-      // Reset inputan barang
       document.getElementById('input-nama').value = "";
       document.getElementById('input-qty').value = "1";
       document.getElementById('input-harga').value = "";
@@ -395,7 +394,6 @@
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
             
-            // Format teks murni tanpa tabel agar print cepat dan tulisan tebal penuh
             pTabel.innerHTML += `
               <span class="item-name-print">${item.nama.toUpperCase()}</span>
               <div class="row-print">
@@ -407,11 +405,9 @@
           
           document.getElementById('p-grand-total').innerText = "RP " + gTotal.toLocaleString('id-ID');
 
-          // Menjalankan perintah print bawaan HP
           setTimeout(function() {
             window.print();
             
-            // Reset Total Form Kasir Setelah Sukses
             daftarBarang = [];
             renderTabel();
             document.getElementById('pelanggan').value = "";
