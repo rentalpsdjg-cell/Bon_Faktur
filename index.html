@@ -1,52 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nota Digital Kasir</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; color: #333; }
-    .header-bar { background-color: #00897b; color: white; padding: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-    .container { max-width: 600px; margin: 10px auto; background: white; padding: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+    /* RESET & BASE STYLE FOR MOBILE */
+    * { box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      background-color: #f5f7fa; 
+      margin: 0; 
+      padding: 0; 
+      color: #333; 
+    }
+    
+    .header-bar { 
+      background-color: #00897b; 
+      color: white; 
+      padding: 15px; 
+      font-size: 18px; 
+      font-weight: bold; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .container { 
+      max-width: 100%; 
+      margin: 10px; 
+      background: white; 
+      padding: 15px; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+      border-radius: 8px; 
+    }
+    
     .logo-section { text-align: center; margin-bottom: 15px; }
-    .logo-placeholder { width: 80px; height: 80px; border-radius: 50%; background: #000; color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
-    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 14px; }
-    .input-group { margin-bottom: 10px; }
-    .input-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #666; }
-    .input-group input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
+    .logo-placeholder { 
+      width: 70px; 
+      height: 70px; 
+      border-radius: 50%; 
+      background: #26a69a; 
+      color: white; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-weight: bold; 
+      font-size: 16px; 
+    }
+    
+    /* FORM GRID YANG MATANG DI HP */
+    .meta-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 10px; 
+      margin-bottom: 15px; 
+    }
+    @media (min-width: 480px) {
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+    }
+    
+    .input-group { margin-bottom: 8px; }
+    .input-group label { 
+      display: block; 
+      font-size: 12px; 
+      font-weight: bold; 
+      margin-bottom: 4px; 
+      color: #555; 
+    }
+    .input-group input { 
+      width: 100%; 
+      padding: 10px; 
+      font-size: 14px;
+      border: 1px solid #ccc; 
+      border-radius: 6px; 
+      background-color: #fafafa;
+    }
+    .input-group input:focus {
+      border-color: #00897b;
+      outline: none;
+      background-color: #fff;
+    }
+    
+    /* TABLE RESPONSIF DI HP */
+    .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid #e0e0e0; padding: 10px; text-align: left; }
+    th { background-color: #f5f5f5; font-weight: bold; }
     .text-right { text-align: right; }
-    .add-form { background: #e0f2f1; padding: 10px; border-radius: 6px; margin-top: 15px; }
-    .btn-add { background-color: #00897b; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: block; margin: 10px auto 0 auto; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-    .btn-submit { background-color: #e65100; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    
+    /* FORM INPUT TAMBAH BARANG */
+    .add-form { 
+      background: #e0f2f1; 
+      padding: 12px; 
+      border-radius: 8px; 
+      margin-top: 15px; 
+    }
+    .add-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    @media (min-width: 400px) {
+      .add-grid { grid-template-columns: 2fr 1fr 1.5fr; }
+    }
+    .add-grid input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #b2dfdb;
+      border-radius: 6px;
+    }
+    
+    .btn-add { 
+      background-color: #00897b; 
+      color: white; 
+      border: none; 
+      width: 100%;
+      height: 44px; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      font-weight: bold;
+      cursor: pointer; 
+      margin-top: 10px; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    }
+    
+    .btn-submit { 
+      background-color: #e65100; 
+      color: white; 
+      border: none; 
+      padding: 14px; 
+      width: 100%; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      font-weight: bold; 
+      cursor: pointer; 
+      margin-top: 20px; 
+      min-height: 48px;
+    }
+    .btn-submit:disabled { background-color: #9e9e9e; }
+    
     .footer-note { font-size: 11px; color: #777; text-align: center; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px; }
 
-    /* LAYOUT PRINTER THERMAL MINI (58mm) */
+    /* AREA STRUK HIDDEN SECARA DEFAULT */
+    #area-cetak-struk { display: none; }
+
+    /* SETTINGAN KHUSUS PRINT OUT HP (THERMAL 58mm) */
     @media print {
-      body * { visibility: hidden; }
-      #area-cetak-struk, #area-cetak-struk * { visibility: visible; }
-      #area-cetak-struk { position: absolute; left: 0; top: 0; width: 54mm; font-family: 'Courier New', monospace; font-size: 11px; color: #000; background: #fff; padding: 0; margin: 0; }
+      body { background: #fff; color: #000; }
+      .header-bar, .container, .add-form, .btn-submit, .footer-note { display: none !important; }
+      
+      #area-cetak-struk { 
+        display: block !important; 
+        width: 54mm; 
+        font-family: 'Courier New', Courier, monospace; 
+        font-size: 11px; 
+        line-height: 1.2;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+      }
       @page { size: 58mm auto; margin: 0; }
-      .container, .header-bar, .add-form, .btn-submit, .footer-note { display: none !important; }
       .line-print { border-top: 1px dashed #000; margin: 5px 0; }
       .c-print { text-align: center; }
       .r-print { text-align: right; }
+      table.tabel-struk { width: 100%; border: none; font-size: 11px; }
+      table.tabel-struk td { border: none; padding: 2px 0; }
     }
-    #area-cetak-struk { display: none; }
   </style>
 </head>
 <body>
 
   <div class="header-bar">
-    <div>🧾 Nota Digital App</div>
-    <div style="font-size: 14px;">Dodi Jaya Game</div>
+    <div>🧾 Nota Digital</div>
+    <div style="font-size: 13px;">Dodi Jaya Game</div>
   </div>
 
   <div class="container">
     <div class="logo-section">
-      <div class="logo-placeholder">LOGO</div>
+      <div class="logo-placeholder">DJG</div>
     </div>
 
     <div class="meta-grid">
@@ -55,32 +193,34 @@
         <div class="input-group"><label>Alamat :</label><input type="text" id="alamat" placeholder="Alamat"></div>
       </div>
       <div>
-        <div class="input-group"><label>No. Telp :</label><input type="text" id="notelp" placeholder="Nomor HP"></div>
+        <div class="input-group"><label>No. Telp :</label><input type="tel" id="notelp" placeholder="Nomor HP"></div>
         <div class="input-group"><label>Tanggal :</label><input type="text" id="tanggal" readonly></div>
       </div>
     </div>
 
-    <table>
-      <thead>
-        <tr><th>Nama Barang</th><th style="width: 50px;">Qty</th><th>Harga</th><th>Jumlah</th></tr>
-      </thead>
-      <tbody id="tabel-item"></tbody>
-    </table>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr><th>Barang</th><th style="width: 45px;">Qty</th><th>Harga</th><th>Total</th></tr>
+        </thead>
+        <tbody id="tabel-item"></tbody>
+      </table>
+    </div>
 
     <div class="add-form">
       <strong style="font-size: 13px; color: #00796b;">+ Tambah Item Barang</strong>
-      <div style="display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 5px; margin-top: 5px;">
+      <div class="add-grid">
         <input type="text" id="input-nama" placeholder="Nama Barang">
-        <input type="number" id="input-qty" placeholder="Qty" value="1">
+        <input type="number" id="input-qty" placeholder="Qty" value="1" min="1">
         <input type="number" id="input-harga" placeholder="Harga (Rp)">
       </div>
-      <button class="btn-add" onclick="tambahItemRow()">+</button>
+      <button class="btn-add" onclick="tambahItemRow()">+ Tambah Item</button>
     </div>
 
-    <table style="margin-top: 20px; border: none;">
-      <tr style="font-weight: bold; font-size: 15px;">
-        <td style="border: none;">TOTAL NOTA:</td>
-        <td class="text-right" style="border: none; color: #d84315;" id="grand-total">Rp 0</td>
+    <table style="margin-top: 20px; border: none; width: 100%;">
+      <tr style="font-weight: bold; font-size: 16px;">
+        <td style="border: none; padding: 0;">TOTAL NOTA:</td>
+        <td class="text-right" style="border: none; color: #d84315; padding: 0;" id="grand-total">Rp 0</td>
       </tr>
     </table>
 
@@ -100,18 +240,19 @@
       No Nota : <span id="p-faktur"></span>
     </div>
     <div class="line-print"></div>
-    <table style="width: 100%; border: none; font-size: 11px;" id="p-tabel-barang"></table>
+    <table class="tabel-struk" id="p-tabel-barang"></table>
     <div class="line-print"></div>
-    <table style="width: 100%; border: none; font-weight: bold; font-size: 11px;">
+    <table class="tabel-struk" style="font-weight: bold;">
       <tr><td>TOTAL</td><td class="r-print" id="p-grand-total"></td></tr>
     </table>
     <div class="line-print"></div>
-    <div class="c-print" style="font-size: 10px;">Terima Kasih Atas Kunjungan Anda</div>
+    <div class="c-print" style="font-size: 10px; margin-top: 5px;">Terima Kasih Atas Kunjungan Anda</div>
   </div>
 
   <script>
+    // Set Tanggal Otomatis saat ini
     var tgl = new Date();
-    document.getElementById('tanggal').value = tgl.getDate() + '-' + (tgl.getMonth()+1) + '-' + tgl.getFullYear();
+    document.getElementById('tanggal').value = ("0" + tgl.getDate()).slice(-2) + '-' + ("0" + (tgl.getMonth()+1)).slice(-2) + '-' + tgl.getFullYear();
 
     var daftarBarang = [];
 
@@ -119,10 +260,16 @@
       var nama = document.getElementById('input-nama').value;
       var qty = parseInt(document.getElementById('input-qty').value);
       var harga = parseFloat(document.getElementById('input-harga').value);
-      if(nama === "" || isNaN(qty) || isNaN(harga)) { alert("Mohon lengkapi data barang!"); return; }
+      
+      if(nama === "" || isNaN(qty) || isNaN(harga)) { 
+        alert("Mohon lengkapi data barang dengan benar!"); 
+        return; 
+      }
 
       var total = qty * harga;
       daftarBarang.push({ nama: nama, qty: qty, harga: harga, total: total });
+      
+      // Reset input barang
       document.getElementById('input-nama').value = "";
       document.getElementById('input-qty').value = "1";
       document.getElementById('input-harga').value = "";
@@ -133,15 +280,21 @@
       var tbody = document.getElementById('tabel-item');
       tbody.innerHTML = "";
       var gTotal = 0;
+      
       daftarBarang.forEach(function(item) {
         gTotal += item.total;
-        tbody.innerHTML += `<tr><td>${item.nama}</td><td>${item.qty}</td><td class="text-right">Rp ${item.harga.toLocaleString('id-ID')}</td><td class="text-right">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
+        tbody.innerHTML += `<tr>
+          <td>${item.nama}</td>
+          <td>${item.qty}</td>
+          <td class="text-right">Rp ${item.harga.toLocaleString('id-ID')}</td>
+          <td class="text-right">Rp ${item.total.toLocaleString('id-ID')}</td>
+        </tr>`;
       });
       document.getElementById('grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
     }
 
     function simpanDanCetakNota() {
-      if(daftarBarang.length === 0) { alert("Belum ada barang!"); return; }
+      if(daftarBarang.length === 0) { alert("Belum ada barang di dalam daftar!"); return; }
       
       var btn = document.getElementById('btnProses');
       btn.innerText = "Mengirim ke Sheets...";
@@ -150,7 +303,7 @@
       var pelanggan = document.getElementById('pelanggan').value || "Umum";
       var paketData = daftarBarang.map(b => ({ nama: b.nama, qty: b.qty, harga: b.harga }));
 
-      // URL WEB APP SINKRONISASI AKTIF
+      // URL Web App Google Apps Script Aktif Anda
       var urlWebApp = "https://script.google.com/macros/s/AKfycbxofhJcs6THJWJ4afCROQy_8fap9lPY6mA7w0qdUaVprhTZ9uuBQR_F0fcW41HGbgnH/exec";
 
       fetch(urlWebApp, {
@@ -160,6 +313,7 @@
       .then(res => res.json())
       .then(response => {
         if(response.status === "SUKSES") {
+          // Isi data ke struk cetak
           document.getElementById('p-waktu').innerText = response.waktu;
           document.getElementById('p-pelanggan').innerText = pelanggan;
           document.getElementById('p-faktur').innerText = response.faktur;
@@ -170,29 +324,31 @@
           
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
-            pTabel.innerHTML += `<tr><td colspan="2">${item.nama}</td></tr><tr><td>${item.qty} x ${item.harga.toLocaleString('id-ID')}</td><td class="r-print">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
+            pTabel.innerHTML += `<tr><td colspan="2">${item.nama}</td></tr>
+                                 <tr><td>${item.qty} x ${item.harga.toLocaleString('id-ID')}</td><td class="r-print">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
           });
           
           document.getElementById('p-grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
 
-          // TRIGGER PRINT THERMAL MINI 58mm
-          document.getElementById('area-cetak-struk').style.display = 'block';
-          window.print();
-          document.getElementById('area-cetak-struk').style.display = 'none';
+          // JALANKAN PROSES CETAK DI ANDROID
+          setTimeout(function() {
+            window.print();
+            
+            // RESET FORM KASIR SETELAH DI-PRINT
+            daftarBarang = [];
+            renderTabel();
+            document.getElementById('pelanggan').value = "";
+            document.getElementById('alamat').value = "";
+            document.getElementById('notelp').value = "";
+          }, 500);
 
-          // RESET FORM KASIR
-          daftarBarang = [];
-          renderTabel();
-          document.getElementById('pelanggan').value = "";
-          document.getElementById('alamat').value = "";
-          document.getElementById('notelp').value = "";
         } else {
-          alert("Gagal menyimpan data!");
+          alert("Gagal menyimpan data ke Google Sheets!");
         }
       })
       .catch(err => {
         console.error(err);
-        alert("Terjadi kesalahan koneksi! Pastikan setingan Web App Anda sudah di-deploy dengan akses 'Anyone'.");
+        alert("Terjadi kesalahan koneksi jaringan atau URL script salah!");
       })
       .finally(() => {
         btn.innerText = "PROSES & CETAK STRUK";
