@@ -141,37 +141,50 @@
     /* AREA STRUK HIDDEN SECARA DEFAULT DI LAYAR HP KASIR */
     #area-cetak-struk { display: none; }
 
-    /* PENGATURAN KHUSUS PRINT OUT: TEBAL & TEKS MURNI (58mm) */
+    /* ======================================================= */
+    /* PENGATURAN KHUSUS PRINT: MURNI TEKS, SUPER BOLD & BESAR */
+    /* ======================================================= */
     @media print {
-      body { background: #fff; color: #000; font-weight: bold; }
+      body { background: #fff; color: #000; }
       .header-bar, .container, .add-form, .btn-submit, .footer-note { display: none !important; }
       
       #area-cetak-struk { 
         display: block !important; 
         width: 54mm; 
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 12px; 
-        font-weight: 900; /* Memaksa teks menjadi super tebal */
-        line-height: 1.3;
+        font-size: 14px;       /* Ukuran huruf diperbesar agar tulisan besar */
+        font-weight: 900;      /* Ketebalan maksimal (Extra Bold) */
+        line-height: 1.4;
         margin: 0;
         padding: 0;
         background: #fff;
         color: #000;
+        text-transform: uppercase; /* Memaksa semua huruf cetak menjadi KAPITAL agar lebih jelas */
       }
       @page { size: 58mm auto; margin: 0; }
       
+      /* Pembatas menggunakan teks murni */
       .line-print { 
-        font-size: 12px;
-        font-weight: bold;
-        margin: 4px 0;
+        font-size: 14px;
+        font-weight: 900;
+        margin: 5px 0;
         white-space: nowrap;
         overflow: hidden;
       }
       .c-print { text-align: center; font-weight: 900; }
-      .r-print { text-align: right; font-weight: 900; }
       
-      table.tabel-struk { width: 100%; border: none; font-size: 12px; font-weight: 900; }
-      table.tabel-struk td { border: none !important; padding: 2px 0; font-weight: 900; }
+      /* Struktur baris barang murni teks menggunakan sistem flex kanan-kiri (bukan tabel) */
+      .row-print {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 900;
+        padding: 2px 0;
+      }
+      .item-name-print {
+        font-weight: 900;
+        display: block;
+        padding-top: 3px;
+      }
     }
   </style>
 </head>
@@ -231,28 +244,35 @@
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <b style="font-size: 14px;">DODI JAYA GAME</b><br>
-      <span>Gunung Lagan, Aceh Singkil</span><br>
+      <span style="font-size: 16px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span>GUNUNG LAGAN, ACEH SINGKIL</span><br>
       <span id="p-waktu"></span>
     </div>
-    <div class="line-print">----------------------------</div>
+    
+    <div class="line-print">============================</div>
+    
     <div>
-      Pelanggan: <span id="p-pelanggan"></span><br>
-      No Nota  : <span id="p-faktur"></span>
+      PELANGGAN: <span id="p-pelanggan"></span><br>
+      NO NOTA  : <span id="p-faktur"></span>
     </div>
-    <div class="line-print">----------------------------</div>
     
-    <table class="tabel-struk" id="p-tabel-barang"></table>
+    <div class="line-print">============================</div>
     
-    <div class="line-print">----------------------------</div>
-    <table class="tabel-struk">
-      <tr>
-        <td><b>TOTAL</b></td>
-        <td class="r-print"><b id="p-grand-total"></b></td>
-      </tr>
-    </table>
-    <div class="line-print">----------------------------</div>
-    <div class="c-print" style="font-size: 11px;">TERIMA KASIH<br>ATAS KUNJUNGAN ANDA</div>
+    <div id="p-tabel-barang"></div>
+    
+    <div class="line-print">============================</div>
+    
+    <div class="row-print" style="font-size: 15px;">
+      <span>TOTAL:</span>
+      <span id="p-grand-total"></span>
+    </div>
+    
+    <div class="line-print">============================</div>
+    
+    <div class="c-print" style="margin-top: 5px;">
+      TERIMA KASIH<br>
+      ATAS KUNJUNGAN ANDA
+    </div>
   </div>
 
   <script>
@@ -326,11 +346,18 @@
           
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
-            pTabel.innerHTML += `<tr><td colspan="2"><b>${item.nama.toUpperCase()}</b></td></tr>
-                                 <tr><td>${item.qty} x ${item.harga.toLocaleString('id-ID')}</td><td class="r-print">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
+            
+            // PERUBAHAN UTAMA: Output diganti menjadi blok teks div agar murni dibaca sebagai teks rata kanan-kiri
+            pTabel.innerHTML += `
+              <span class="item-name-print">${item.nama.toUpperCase()}</span>
+              <div class="row-print">
+                <span>${item.qty} X ${item.harga.toLocaleString('id-ID')}</span>
+                <span>RP ${item.total.toLocaleString('id-ID')}</span>
+              </div>
+            `;
           });
           
-          document.getElementById('p-grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
+          document.getElementById('p-grand-total').innerText = "RP " + gTotal.toLocaleString('id-ID');
 
           setTimeout(function() {
             window.print();
