@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Nota Digital Kasir Luxury</title>
+  <title>Nota Digital Kasir Luxury Pro</title>
   <style>
     /* ======================================================= */
-    /* PREMIUM LUXURY MINIMALIST UI (LAYAR HP)                 */
+    /* ULTRA-PREMIUM LUXURY MINIMALIST UI (LAYAR HP)           */
     /* ======================================================= */
     * { 
       box-sizing: border-box; 
@@ -15,7 +15,7 @@
     }
     
     body { 
-      background-color: #f8fafc; 
+      background-color: #f1f5f9; 
       margin: 0; 
       padding: 0; 
       color: #0f172a; 
@@ -25,61 +25,64 @@
     }
     
     .header-bar { 
-      background: #022c22; 
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
       color: #f8fafc; 
-      padding: 20px; 
+      padding: 22px 20px; 
       font-size: 20px; 
-      font-weight: 700; 
+      font-weight: 800; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(2, 44, 34, 0.15);
     }
 
     .header-bar .subtitle {
       font-size: 11px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 5px 12px;
-      border-radius: 30px;
-      font-weight: 600;
+      background: rgba(52, 211, 153, 0.15);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-weight: 700;
       letter-spacing: 0.5px;
       color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.2);
     }
     
     .container { 
       max-width: 480px; 
       width: 100%;
       margin: 0 auto;
-      padding: 20px; 
+      padding: 20px 16px; 
       flex: 1;
     }
     
     .card-luxury {
       background: #ffffff;
-      padding: 22px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 18px;
+      padding: 24px 20px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.02), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      margin-bottom: 20px;
     }
     
     .section-title {
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 11px;
+      font-weight: 800;
       color: #94a3b8;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-      display: block;
+      letter-spacing: 1.5px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .meta-grid { 
       display: grid; 
       grid-template-columns: 1fr; 
-      gap: 14px; 
+      gap: 16px; 
     }
     @media (min-width: 440px) {
       .meta-grid { grid-template-columns: 1fr 1fr; }
@@ -88,16 +91,16 @@
     .input-group label { 
       display: block; 
       font-size: 11px; 
-      font-weight: 600; 
+      font-weight: 700; 
       margin-bottom: 6px; 
       color: #475569; 
     }
     .input-group input { 
       width: 100%; 
-      padding: 12px 14px; 
+      padding: 13px 16px; 
       font-size: 14px; 
       border: 1px solid #e2e8f0; 
-      border-radius: 12px; 
+      border-radius: 14px; 
       background-color: #f8fafc;
       color: #0f172a;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -109,97 +112,102 @@
       outline: none;
     }
     
-    .table-responsive { width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid #e2e8f0; }
+    .table-responsive { width: 100%; overflow: hidden; border-radius: 16px; border: 1px solid #e2e8f0; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th, td { padding: 14px; text-align: left; }
-    th { background-color: #f8fafc; font-weight: 600; color: #64748b; border-bottom: 1px solid #e2e8f0; }
+    th { background-color: #f8fafc; font-weight: 700; color: #64748b; border-bottom: 1px solid #e2e8f0; }
     td { border-bottom: 1px solid #f1f5f9; color: #1e293b; }
     .text-right { text-align: right; }
     
     .add-form { 
       background: #f0fdf4; 
-      border: 1px dashed #bbf7d0;
+      border: 1px dashed #a7f3d0;
     }
     .add-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 12px;
     }
     @media (min-width: 400px) {
       .add-grid { grid-template-columns: 2fr 1fr 1.5fr; }
     }
     .add-grid input {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       font-size: 14px;
       border: 1px solid #cbd5e1;
-      border-radius: 10px;
+      border-radius: 12px;
+      background: #fff;
     }
+    .add-grid input:focus { border-color: #059669; outline: none; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1); }
     
     .btn-add { 
-      background-color: #022c22; 
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
       color: white; 
       border: none; 
       width: 100%;
-      height: 46px; 
-      border-radius: 12px; 
+      height: 48px; 
+      border-radius: 14px; 
       font-size: 14px; 
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer; 
-      margin-top: 12px; 
+      margin-top: 14px; 
+      box-shadow: 0 4px 12px rgba(2, 44, 34, 0.1);
+      transition: all 0.2s;
     }
+    .btn-add:active { transform: scale(0.99); opacity: 0.95; }
     
     .total-box {
-      background: #022c22;
-      padding: 18px 22px;
-      border-radius: 16px;
+      background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      padding: 20px 24px;
+      border-radius: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
+      box-shadow: 0 10px 25px -5px rgba(2, 44, 34, 0.2);
     }
-    .total-title { font-size: 12px; font-weight: 600; color: #a7f3d0; }
-    .total-amount { font-size: 22px; font-weight: 700; }
+    .total-title { font-size: 11px; font-weight: 700; color: #a7f3d0; letter-spacing: 1px; }
+    .total-amount { font-size: 24px; font-weight: 800; color: #ffffff; }
 
     .btn-submit { 
-      background: #dc2626;
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
       color: white; 
       border: none; 
-      padding: 16px; 
+      padding: 18px; 
       width: 100%; 
-      border-radius: 16px; 
+      border-radius: 20px; 
       font-size: 16px; 
       font-weight: 700; 
       cursor: pointer; 
-      margin-top: 14px; 
-      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+      margin-top: 16px; 
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.2);
+      transition: all 0.2s;
     }
+    .btn-submit:active { transform: scale(0.98); }
     .btn-submit:disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
-    .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 20px; line-height: 1.5; }
+    
+    .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 25px; line-height: 1.6; padding: 0 10px; }
 
     /* ======================================================= */
-    /* ELEMEN AREA PRINT (TERSEMBUNYI SECARA DEFAULT)          */
+    /* INTERFACES KHUSUS UNTUK PROSES PRINT                     */
     /* ======================================================= */
     #area-cetak-struk { display: none; }
 
-    /* ======================================================= */
-    /* PERSKALAAN KHUSUS PRINTER THERMAL MINI 58MM             */
-    /* ======================================================= */
     @media print {
-      /* Sembunyikan semua elemen UI layar handphone */
       body { background: #fff; color: #000; margin: 0; padding: 0; }
       .header-bar, .container { display: none !important; }
       
       #area-cetak-struk { 
         display: block !important; 
-        width: 48mm;             /* Batas lebar cetak efektif kertas 58mm agar sisi kanan tidak terpotong */
+        width: 48mm;             /* Ukuran cetak efektif printer 58mm */
         max-width: 48mm;
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 13px;         /* Ukuran font besar proporsional untuk kertas 58mm */
-        font-weight: 900;        /* Ketebalan cetak maksimum hitam pekat */
+        font-size: 13px;         /* Ukuran font besar & proporsional */
+        font-weight: 900;        /* Bold maksimal hitam pekat */
         line-height: 1.3;
         margin: 0 auto;
-        padding: 0 2mm;          /* Safety padding kanan kiri */
+        padding: 4mm 1mm;        /* Padding atas bawah dan samping */
         background: #fff;
         color: #000;
         text-transform: uppercase; 
@@ -207,14 +215,14 @@
       }
       
       @page { 
-        size: 58mm auto;         /* Spesifikasi ukuran kertas thermal mini */
-        margin: 0;               /* Menghilangkan margin browser/sistem android */
+        size: 58mm auto; 
+        margin: 0; 
       }
       
       .line-print { 
         font-size: 13px;
         font-weight: 900;
-        margin: 4px 0;
+        margin: 5px 0;
         white-space: nowrap;
         overflow: hidden;
         letter-spacing: -0.5px;
@@ -233,8 +241,8 @@
       .item-name-print {
         font-weight: 900;
         display: block;
-        padding-top: 4px;
-        word-wrap: break-word; /* Jika nama barang panjang, otomatis turun dengan rapi */
+        padding-top: 5px;
+        word-wrap: break-word;
       }
     }
   </style>
@@ -248,7 +256,7 @@
 
   <div class="container">
     <div class="card-luxury">
-      <span class="section-title">Data Transaksi</span>
+      <span class="section-title">✦ Data Transaksi</span>
       <div class="meta-grid">
         <div class="input-group"><label>Kepada :</label><input type="text" id="pelanggan" placeholder="Nama Pelanggan"></div>
         <div class="input-group"><label>Alamat :</label><input type="text" id="alamat" placeholder="Alamat"></div>
@@ -257,8 +265,8 @@
       </div>
     </div>
 
-    <div class="card-luxury" style="padding: 14px;">
-      <span class="section-title">Daftar Item</span>
+    <div class="card-luxury" style="padding: 16px;">
+      <span class="section-title">✦ Daftar Item Belanja</span>
       <div class="table-responsive">
         <table>
           <thead>
@@ -270,7 +278,7 @@
     </div>
 
     <div class="card-luxury add-form">
-      <span class="section-title" style="color: #065f46; margin-bottom: 10px;">+ Tambah Barang</span>
+      <span class="section-title" style="color: #065f46; margin-bottom: 12px;">✦ Input Tambah Barang</span>
       <div class="add-grid">
         <input type="text" id="input-nama" placeholder="Nama Barang">
         <input type="number" id="input-qty" placeholder="Qty" value="1" min="1">
@@ -280,25 +288,26 @@
     </div>
 
     <div class="total-box">
-      <span class="total-title">TOTAL TAGIHAN</span>
+      <span class="total-title">TOTAL TAGIHAN BRUTO</span>
       <span class="total-amount" id="grand-total">Rp 0</span>
     </div>
 
     <button class="btn-submit" id="btnProses" onclick="simpanDanCetakNota()">PROSES & CETAK STRUK</button>
-    <div class="footer-note">Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
+    
+    <div class="footer-note">Perhatian: Barang yang sudah dibeli tidak dapat dikembalikan atau ditukar tanpa adanya perjanjian tertulis sebelumnya.</div>
   </div>
 
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <span style="font-size: 15px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span style="font-size: 16px; font-weight: 900;">DODI JAYA GAME</span><br>
       <span style="font-size: 11px;">GUNUNG LAGAN, ACEH SINGKIL</span><br>
       <span id="p-waktu" style="font-size: 11px;"></span>
     </div>
     
     <div class="line-print">======================</div>
     
-    <div style="font-size: 12px;">
+    <div style="font-size: 12px; font-weight: 900;">
       PELANGGAN: <span id="p-pelanggan"></span><br>
       NO NOTA  : <span id="p-faktur"></span>
     </div>
@@ -309,20 +318,21 @@
     
     <div class="line-print">======================</div>
     
-    <div class="row-print" style="font-size: 14px;">
+    <div class="row-print" style="font-size: 14px; font-weight: 900;">
       <span>TOTAL:</span>
       <span id="p-grand-total"></span>
     </div>
     
     <div class="line-print">======================</div>
     
-    <div class="c-print" style="margin-top: 6px; font-size: 11px;">
+    <div class="c-print" style="margin-top: 10px; font-size: 11px; font-weight: 900;">
       TERIMA KASIH<br>
       ATAS KUNJUNGAN ANDA
     </div>
   </div>
 
   <script>
+    // Inisialisasi Tanggal Otomatis
     var tgl = new Date();
     document.getElementById('tanggal').value = ("0" + tgl.getDate()).slice(-2) + '-' + ("0" + (tgl.getMonth()+1)).slice(-2) + '-' + tgl.getFullYear();
 
@@ -334,7 +344,7 @@
       var harga = parseFloat(document.getElementById('input-harga').value);
       
       if(nama === "" || isNaN(qty) || isNaN(harga)) { 
-        alert("Mohon isi nama barang dan harga dengan benar!"); 
+        alert("Mohon isi data produk dan harga dengan benar!"); 
         return; 
       }
 
@@ -365,7 +375,7 @@
     }
 
     function simpanDanCetakNota() {
-      if(daftarBarang.length === 0) { alert("Tambahkan minimal 1 jenis barang terlebih dahulu!"); return; }
+      if(daftarBarang.length === 0) { alert("Tambahkan item barang terlebih dahulu!"); return; }
       
       var btn = document.getElementById('btnProses');
       btn.innerText = "MENYIMPAN DATA...";
@@ -408,6 +418,7 @@
           setTimeout(function() {
             window.print();
             
+            // Bersihkan form input setelah transaksi berhasil diprint
             daftarBarang = [];
             renderTabel();
             document.getElementById('pelanggan').value = "";
@@ -416,12 +427,12 @@
           }, 400);
 
         } else {
-          alert("Gagal terhubung dengan Google Sheets!");
+          alert("Gagal melakukan sinkronisasi data ke cloud sheets!");
         }
       })
       .catch(err => {
         console.error(err);
-        alert("Koneksi terputus. Sila cek jaringan Anda!");
+        alert("Gangguan koneksi internet. Silakan ulangi!");
       })
       .finally(() => {
         btn.innerText = "PROSES & CETAK STRUK";
