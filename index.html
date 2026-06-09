@@ -3,221 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Nota Digital Kasir Pro</title>
+  <title>Nota Digital Kasir Luxury</title>
   <style>
     /* ======================================================= */
-    /* MODERN UI LAYAR HP KASIR (TAMPILAN BARU)                 */
+    /* PREMIUM LUXURY MINIMALIST UI (LAYAR HP)                 */
     /* ======================================================= */
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    * { 
+      box-sizing: border-box; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
     
     body { 
       background-color: #f8fafc; 
       margin: 0; 
       padding: 0; 
-      color: #1e293b; 
+      color: #0f172a; 
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     
     .header-bar { 
-      background: linear-gradient(135deg, #0f766e, #0d9488);
-      color: white; 
-      padding: 18px 20px; 
-      font-size: 19px; 
+      background: #022c22; /* Emerald Gelap Mewah */
+      color: #f8fafc; 
+      padding: 20px; 
+      font-size: 20px; 
       font-weight: 700; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .header-bar .subtitle {
-      font-size: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: 500;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #34d399;
     }
     
     .container { 
-      max-width: 500px; 
-      margin: 15px auto; 
-      background: white; 
+      max-width: 480px; 
+      width: 100%;
+      margin: 0 auto;
       padding: 20px; 
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-      border-radius: 16px; 
-      border: 1px solid #f1f5f9;
+      flex: 1;
     }
     
-    .logo-section { text-align: center; margin-bottom: 20px; }
-    .logo-placeholder { 
-      width: 64px; 
-      height: 64px; 
-      border-radius: 14px; 
-      background: #ccfbf1; 
-      color: #0f766e; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-weight: 800; 
-      font-size: 20px; 
+    .card-luxury {
+      background: #ffffff;
+      padding: 22px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 18px;
     }
     
     .section-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      color: #64748b;
+      color: #94a3b8;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
       display: block;
     }
 
     .meta-grid { 
       display: grid; 
       grid-template-columns: 1fr; 
-      gap: 12px; 
-      margin-bottom: 20px; 
-      background: #f8fafc;
-      padding: 14px;
-      border-radius: 12px;
+      gap: 14px; 
     }
-    @media (min-width: 480px) {
+    @media (min-width: 440px) {
       .meta-grid { grid-template-columns: 1fr 1fr; }
     }
     
+    .input-group { position: relative; }
     .input-group label { 
       display: block; 
       font-size: 11px; 
-      font-weight: 700; 
+      font-weight: 600; 
       margin-bottom: 6px; 
       color: #475569; 
     }
     .input-group input { 
       width: 100%; 
-      padding: 11px 14px; 
+      padding: 12px 14px; 
       font-size: 14px; 
-      border: 1px solid #cbd5e1; 
-      border-radius: 8px; 
-      background-color: #fff;
-      color: #1e293b;
-      transition: all 0.2s;
+      border: 1px solid #e2e8f0; 
+      border-radius: 12px; 
+      background-color: #f8fafc;
+      color: #0f172a;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .input-group input:focus {
-      border-color: #0d9488;
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+      border-color: #059669;
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.08);
       outline: none;
     }
     
-    .table-responsive { width: 100%; margin-top: 10px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
+    .table-responsive { width: 100%; overflow: hidden; border-radius: 12px; border: 1px solid #e2e8f0; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { padding: 12px 14px; text-align: left; }
-    th { background-color: #f1f5f9; font-weight: 700; color: #475569; border-bottom: 1px solid #e2e8f0; }
-    td { border-bottom: 1px solid #f1f5f9; color: #334155; }
+    th, td { padding: 14px; text-align: left; }
+    th { background-color: #f8fafc; font-weight: 600; color: #64748b; border-bottom: 1px solid #e2e8f0; }
+    td { border-bottom: 1px solid #f1f5f9; color: #1e293b; }
     .text-right { text-align: right; }
     
     .add-form { 
-      background: #f0fdfa; 
-      padding: 16px; 
-      border-radius: 12px; 
-      margin-top: 20px; 
-      border: 1px solid #b2f5ea;
+      background: #f0fdf4; 
+      border: 1px dashed #bbf7d0;
     }
     .add-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
-      margin-top: 10px;
     }
     @media (min-width: 400px) {
       .add-grid { grid-template-columns: 2fr 1fr 1.5fr; }
     }
     .add-grid input {
       width: 100%;
-      padding: 11px;
+      padding: 12px;
       font-size: 14px;
-      border: 1px solid #99f6e4;
-      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      background: #fff;
     }
-    .add-grid input:focus { border-color: #0d9488; outline: none; background: #fff; }
+    .add-grid input:focus { border-color: #059669; outline: none; }
     
     .btn-add { 
-      background-color: #0d9488; 
+      background-color: #022c22; 
       color: white; 
       border: none; 
       width: 100%;
-      height: 44px; 
-      border-radius: 8px; 
+      height: 46px; 
+      border-radius: 12px; 
       font-size: 14px; 
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer; 
       margin-top: 12px; 
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
-    .btn-add:hover { background-color: #0f766e; }
+    .btn-add:active { background-color: #064e3b; transform: scale(0.98); }
     
     .total-box {
-      margin-top: 20px;
-      background: #fef2f2;
-      padding: 16px;
-      border-radius: 12px;
+      background: #022c22;
+      padding: 18px 22px;
+      border-radius: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1px solid #fee2e2;
+      color: white;
     }
-    .total-title { font-size: 13px; font-weight: 700; color: #991b1b; }
-    .total-amount { font-size: 20px; font-weight: 800; color: #dc2626; }
+    .total-title { font-size: 12px; font-weight: 600; color: #a7f3d0; letter-spacing: 0.5px; }
+    .total-amount { font-size: 22px; font-weight: 700; color: #ffffff; }
 
     .btn-submit { 
-      background: linear-gradient(135deg, #ea580c, #c2410c);
+      background: #dc2626;
       color: white; 
       border: none; 
       padding: 16px; 
       width: 100%; 
-      border-radius: 10px; 
+      border-radius: 16px; 
       font-size: 16px; 
       font-weight: 700; 
       cursor: pointer; 
-      margin-top: 15px; 
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+      margin-top: 14px; 
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
       transition: all 0.2s;
     }
     .btn-submit:active { transform: scale(0.98); }
-    .btn-submit:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; }
+    .btn-submit:disabled { background: #cbd5e1; box-shadow: none; color: #94a3b8; cursor: not-allowed; }
     
-    .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 25px; border-top: 1px dashed #e2e8f0; padding-top: 12px; line-height: 1.5; }
+    .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 20px; line-height: 1.5; }
 
     /* ======================================================= */
-    /* AREA STRUK HIDDEN DI LAYAR HANDPHONE                     */
+    /* ELEMEN AREA PRINT (TERSEMBUNYI SECARA DEFAULT)          */
     /* ======================================================= */
     #area-cetak-struk { display: none; }
 
     /* ======================================================= */
-    /* STRUKTURAL PRINT: TEKS MURNI, GEDE & BOLD MAKSIMAL      */
+    /* OPTIMASI TOTAL PRINT: SUPER BOLD, TEKS MURNI, BESAR     */
     /* ======================================================= */
     @media print {
       body { background: #fff; color: #000; }
-      .header-bar, .container, .add-form, .btn-submit, .footer-note { display: none !important; }
+      .header-bar, .container, #area-cetak-struk + button { display: none !important; }
       
       #area-cetak-struk { 
         display: block !important; 
         width: 54mm; 
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 14px;         /* Huruf teks ukuran besar */
-        font-weight: 900;        /* Ketebalan cetak hitam pekat */
+        font-size: 15px;         /* Diperbesar agar teks terlihat besar mantap */
+        font-weight: 900;        /* Ketebalan cetak maksimum hitam pekat */
         line-height: 1.4;
         margin: 0;
         padding: 0;
         background: #fff;
         color: #000;
-        text-transform: uppercase; /* Otomatis Kapital */
+        text-transform: uppercase; /* Otomatis tulisan menjadi kapital */
       }
       @page { size: 58mm auto; margin: 0; }
       
       .line-print { 
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 900;
         margin: 6px 0;
         white-space: nowrap;
@@ -225,7 +221,7 @@
       }
       .c-print { text-align: center; font-weight: 900; }
       
-      /* Struktur Baris Barang Tanpa Komponen Tabel */
+      /* Struktur baris murni teks, aman bebas eror printer */
       .row-print {
         display: flex;
         justify-content: space-between;
@@ -235,7 +231,7 @@
       .item-name-print {
         font-weight: 900;
         display: block;
-        padding-top: 4px;
+        padding-top: 5px;
       }
     }
   </style>
@@ -243,60 +239,58 @@
 <body>
 
   <div class="header-bar">
-    <div>🧾 Nota Digital Pro</div>
-    <div class="subtitle">Dodi Jaya Game</div>
+    <div>🧾 Nota Digital</div>
+    <div class="subtitle">DODI JAYA GAME</div>
   </div>
 
   <div class="container">
-    <div class="logo-section">
-      <div class="logo-placeholder">DJG</div>
-    </div>
-
-    <span class="section-title">Informasi Pelanggan</span>
-    <div class="meta-grid">
-      <div>
+    
+    <div class="card-luxury">
+      <span class="section-title">Data Transaksi</span>
+      <div class="meta-grid">
         <div class="input-group"><label>Kepada :</label><input type="text" id="pelanggan" placeholder="Nama Pelanggan"></div>
         <div class="input-group"><label>Alamat :</label><input type="text" id="alamat" placeholder="Alamat"></div>
-      </div>
-      <div>
         <div class="input-group"><label>No. Telp :</label><input type="tel" id="notelp" placeholder="Nomor HP"></div>
         <div class="input-group"><label>Tanggal :</label><input type="text" id="tanggal" readonly></div>
       </div>
     </div>
 
-    <span class="section-title">Daftar Belanja</span>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr><th>Barang</th><th style="width: 50px;">Qty</th><th>Harga</th><th>Total</th></tr>
-        </thead>
-        <tbody id="tabel-item"></tbody>
-      </table>
+    <div class="card-luxury" style="padding: 14px;">
+      <span class="section-title">Daftar Item</span>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Barang</th><th style="width: 45px;">Qty</th><th>Harga</th><th>Total</th></tr>
+          </thead>
+          <tbody id="tabel-item"></tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="add-form">
-      <strong style="font-size: 13px; color: #0f766e; font-weight: 700;">+ Tambah Barang Baru</strong>
+    <div class="card-luxury add-form">
+      <span class="section-title" style="color: #065f46; margin-bottom: 10px;">+ Tambah Barang</span>
       <div class="add-grid">
         <input type="text" id="input-nama" placeholder="Nama Barang">
         <input type="number" id="input-qty" placeholder="Qty" value="1" min="1">
         <input type="number" id="input-harga" placeholder="Harga (Rp)">
       </div>
-      <button class="btn-add" onclick="tambahItemRow()">+ Masukkan ke Daftar</button>
+      <button class="btn-add" onclick="tambahItemRow()">Masukkan ke Daftar</button>
     </div>
 
     <div class="total-box">
-      <span class="total-title">TOTAL NOTA</span>
+      <span class="total-title">TOTAL TAGIHAN</span>
       <span class="total-amount" id="grand-total">Rp 0</span>
     </div>
 
     <button class="btn-submit" id="btnProses" onclick="simpanDanCetakNota()">PROSES & CETAK STRUK</button>
-    <div class="footer-note">PERHATIAN :<br>Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
+    
+    <div class="footer-note">Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
   </div>
 
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <span style="font-size: 17px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span style="font-size: 18px; font-weight: 900;">DODI JAYA GAME</span><br>
       <span>GUNUNG LAGAN, ACEH SINGKIL</span><br>
       <span id="p-waktu"></span>
     </div>
@@ -321,13 +315,14 @@
     
     <div class="line-print">============================</div>
     
-    <div class="c-print" style="margin-top: 6px;">
+    <div class="c-print" style="margin-top: 8px;">
       TERIMA KASIH<br>
       ATAS KUNJUNGAN ANDA
     </div>
   </div>
 
   <script>
+    // Ambil tanggal otomatis hari ini
     var tgl = new Date();
     document.getElementById('tanggal').value = ("0" + tgl.getDate()).slice(-2) + '-' + ("0" + (tgl.getMonth()+1)).slice(-2) + '-' + tgl.getFullYear();
 
@@ -339,13 +334,14 @@
       var harga = parseFloat(document.getElementById('input-harga').value);
       
       if(nama === "" || isNaN(qty) || isNaN(harga)) { 
-        alert("Mohon lengkapi data barang dengan benar!"); 
+        alert("Mohon isi nama barang dan harga dengan benar!"); 
         return; 
       }
 
       var total = qty * harga;
       daftarBarang.push({ nama: nama, qty: qty, harga: harga, total: total });
       
+      // Reset inputan barang
       document.getElementById('input-nama').value = "";
       document.getElementById('input-qty').value = "1";
       document.getElementById('input-harga').value = "";
@@ -363,14 +359,14 @@
           <td><b>${item.nama}</b></td>
           <td>${item.qty}</td>
           <td class="text-right">Rp ${item.harga.toLocaleString('id-ID')}</td>
-          <td class="text-right" style="font-weight:700;">Rp ${item.total.toLocaleString('id-ID')}</td>
+          <td class="text-right" style="font-weight:700; color:#059669;">Rp ${item.total.toLocaleString('id-ID')}</td>
         </tr>`;
       });
       document.getElementById('grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
     }
 
     function simpanDanCetakNota() {
-      if(daftarBarang.length === 0) { alert("Belum ada barang di dalam daftar!"); return; }
+      if(daftarBarang.length === 0) { alert("Tambahkan minimal 1 jenis barang terlebih dahulu!"); return; }
       
       var btn = document.getElementById('btnProses');
       btn.innerText = "MENYIMPAN DATA...";
@@ -399,6 +395,7 @@
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
             
+            // Format teks murni tanpa tabel agar print cepat dan tulisan tebal penuh
             pTabel.innerHTML += `
               <span class="item-name-print">${item.nama.toUpperCase()}</span>
               <div class="row-print">
@@ -410,24 +407,25 @@
           
           document.getElementById('p-grand-total').innerText = "RP " + gTotal.toLocaleString('id-ID');
 
+          // Menjalankan perintah print bawaan HP
           setTimeout(function() {
             window.print();
             
-            // Reset Form Kasir
+            // Reset Total Form Kasir Setelah Sukses
             daftarBarang = [];
             renderTabel();
             document.getElementById('pelanggan').value = "";
             document.getElementById('alamat').value = "";
             document.getElementById('notelp').value = "";
-          }, 500);
+          }, 400);
 
         } else {
-          alert("Gagal menyimpan data ke Google Sheets!");
+          alert("Gagal terhubung dengan Google Sheets!");
         }
       })
       .catch(err => {
         console.error(err);
-        alert("Terjadi kesalahan koneksi!");
+        alert("Koneksi terputus. Sila cek jaringan Anda!");
       })
       .finally(() => {
         btn.innerText = "PROSES & CETAK STRUK";
