@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nota Digital Kasir</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; color: #333; }
+    .header-bar { background-color: #00897b; color: white; padding: 15px; font-size: 20px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .container { max-width: 600px; margin: 10px auto; background: white; padding: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+    .logo-section { text-align: center; margin-bottom: 15px; }
+    .logo-placeholder { width: 80px; height: 80px; border-radius: 50%; background: #000; color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
+    .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 14px; }
+    .input-group { margin-bottom: 10px; }
+    .input-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 3px; color: #666; }
+    .input-group input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .text-right { text-align: right; }
+    .add-form { background: #e0f2f1; padding: 10px; border-radius: 6px; margin-top: 15px; }
+    .btn-add { background-color: #00897b; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: block; margin: 10px auto 0 auto; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .btn-submit { background-color: #e65100; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    .footer-note { font-size: 11px; color: #777; text-align: center; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px; }
+
+    /* LAYOUT PRINTER THERMAL MINI (58mm) */
+    @media print {
+      body * { visibility: hidden; }
+      #area-cetak-struk, #area-cetak-struk * { visibility: visible; }
+      #area-cetak-struk { position: absolute; left: 0; top: 0; width: 54mm; font-family: 'Courier New', monospace; font-size: 11px; color: #000; background: #fff; padding: 0; margin: 0; }
+      @page { size: 58mm auto; margin: 0; }
+      .container, .header-bar, .add-form, .btn-submit, .footer-note { display: none !important; }
+      .line-print { border-top: 1px dashed #000; margin: 5px 0; }
+      .c-print { text-align: center; }
+      .r-print { text-align: right; }
+    }
+    #area-cetak-struk { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <div>🧾 Nota Digital App</div>
+    <div style="font-size: 14px;">Dodi Jaya Game</div>
+  </div>
+
+  <div class="container">
+    <div class="logo-section">
+      <div class="logo-placeholder">LOGO</div>
+    </div>
+
+    <div class="meta-grid">
+      <div>
+        <div class="input-group"><label>Kepada :</label><input type="text" id="pelanggan" placeholder="Nama Pelanggan"></div>
+        <div class="input-group"><label>Alamat :</label><input type="text" id="alamat" placeholder="Alamat"></div>
+      </div>
+      <div>
+        <div class="input-group"><label>No. Telp :</label><input type="text" id="notelp" placeholder="Nomor HP"></div>
+        <div class="input-group"><label>Tanggal :</label><input type="text" id="tanggal" readonly></div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Nama Barang</th><th style="width: 50px;">Qty</th><th>Harga</th><th>Jumlah</th></tr>
+      </thead>
+      <tbody id="tabel-item"></tbody>
+    </table>
+
+    <div class="add-form">
+      <strong style="font-size: 13px; color: #00796b;">+ Tambah Item Barang</strong>
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 5px; margin-top: 5px;">
+        <input type="text" id="input-nama" placeholder="Nama Barang">
+        <input type="number" id="input-qty" placeholder="Qty" value="1">
+        <input type="number" id="input-harga" placeholder="Harga (Rp)">
+      </div>
+      <button class="btn-add" onclick="tambahItemRow()">+</button>
+    </div>
+
+    <table style="margin-top: 20px; border: none;">
+      <tr style="font-weight: bold; font-size: 15px;">
+        <td style="border: none;">TOTAL NOTA:</td>
+        <td class="text-right" style="border: none; color: #d84315;" id="grand-total">Rp 0</td>
+      </tr>
+    </table>
+
+    <button class="btn-submit" id="btnProses" onclick="simpanDanCetakNota()">PROSES & CETAK STRUK</button>
+    <div class="footer-note">PERHATIAN :<br>Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
+  </div>
+
+  <div id="area-cetak-struk">
+    <div class="c-print">
+      <strong style="font-size: 13px;">DODI JAYA GAME</strong><br>
+      <span>Gunung Lagan, Aceh Singkil</span><br>
+      <span id="p-waktu"></span>
+    </div>
+    <div class="line-print"></div>
+    <div style="font-size: 11px;">
+      Pelanggan: <span id="p-pelanggan"></span><br>
+      No Nota : <span id="p-faktur"></span>
+    </div>
+    <div class="line-print"></div>
+    <table style="width: 100%; border: none; font-size: 11px;" id="p-tabel-barang"></table>
+    <div class="line-print"></div>
+    <table style="width: 100%; border: none; font-weight: bold; font-size: 11px;">
+      <tr><td>TOTAL</td><td class="r-print" id="p-grand-total"></td></tr>
+    </table>
+    <div class="line-print"></div>
+    <div class="c-print" style="font-size: 10px;">Terima Kasih Atas Kunjungan Anda</div>
+  </div>
+
+  <script>
+    var tgl = new Date();
+    document.getElementById('tanggal').value = tgl.getDate() + '-' + (tgl.getMonth()+1) + '-' + tgl.getFullYear();
+
+    var daftarBarang = [];
+
+    function tambahItemRow() {
+      var nama = document.getElementById('input-nama').value;
+      var qty = parseInt(document.getElementById('input-qty').value);
+      var harga = parseFloat(document.getElementById('input-harga').value);
+      if(nama === "" || isNaN(qty) || isNaN(harga)) { alert("Mohon lengkapi data barang!"); return; }
+
+      var total = qty * harga;
+      daftarBarang.push({ nama: nama, qty: qty, harga: harga, total: total });
+      document.getElementById('input-nama').value = "";
+      document.getElementById('input-qty').value = "1";
+      document.getElementById('input-harga').value = "";
+      renderTabel();
+    }
+
+    function renderTabel() {
+      var tbody = document.getElementById('tabel-item');
+      tbody.innerHTML = "";
+      var gTotal = 0;
+      daftarBarang.forEach(function(item) {
+        gTotal += item.total;
+        tbody.innerHTML += `<tr><td>${item.nama}</td><td>${item.qty}</td><td class="text-right">Rp ${item.harga.toLocaleString('id-ID')}</td><td class="text-right">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
+      });
+      document.getElementById('grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
+    }
+
+    function simpanDanCetakNota() {
+      if(daftarBarang.length === 0) { alert("Belum ada barang!"); return; }
+      
+      var btn = document.getElementById('btnProses');
+      btn.innerText = "Mengirim ke Sheets...";
+      btn.disabled = true;
+
+      var pelanggan = document.getElementById('pelanggan').value || "Umum";
+      var paketData = daftarBarang.map(b => ({ nama: b.nama, qty: b.qty, harga: b.harga }));
+
+      // URL WEB APP SINKRONISASI AKTIF
+      var urlWebApp = "https://script.google.com/macros/s/AKfycbxofhJcs6THJWJ4afCROQy_8fap9lPY6mA7w0qdUaVprhTZ9uuBQR_F0fcW41HGbgnH/exec";
+
+      fetch(urlWebApp, {
+        method: "POST",
+        body: JSON.stringify({ pelanggan: pelanggan, data: paketData })
+      })
+      .then(res => res.json())
+      .then(response => {
+        if(response.status === "SUKSES") {
+          document.getElementById('p-waktu').innerText = response.waktu;
+          document.getElementById('p-pelanggan').innerText = pelanggan;
+          document.getElementById('p-faktur').innerText = response.faktur;
+          
+          var pTabel = document.getElementById('p-tabel-barang');
+          pTabel.innerHTML = "";
+          var gTotal = 0;
+          
+          daftarBarang.forEach(function(item) {
+            gTotal += item.total;
+            pTabel.innerHTML += `<tr><td colspan="2">${item.nama}</td></tr><tr><td>${item.qty} x ${item.harga.toLocaleString('id-ID')}</td><td class="r-print">Rp ${item.total.toLocaleString('id-ID')}</td></tr>`;
+          });
+          
+          document.getElementById('p-grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
+
+          // TRIGGER PRINT THERMAL MINI 58mm
+          document.getElementById('area-cetak-struk').style.display = 'block';
+          window.print();
+          document.getElementById('area-cetak-struk').style.display = 'none';
+
+          // RESET FORM KASIR
+          daftarBarang = [];
+          renderTabel();
+          document.getElementById('pelanggan').value = "";
+          document.getElementById('alamat').value = "";
+          document.getElementById('notelp').value = "";
+        } else {
+          alert("Gagal menyimpan data!");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Terjadi kesalahan koneksi! Pastikan setingan Web App Anda sudah di-deploy dengan akses 'Anyone'.");
+      })
+      .finally(() => {
+        btn.innerText = "PROSES & CETAK STRUK";
+        btn.disabled = false;
+      });
+    }
+  </script>
+</body>
+</html>
