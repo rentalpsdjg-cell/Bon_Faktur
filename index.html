@@ -3,146 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Nota Digital Kasir</title>
+  <title>Nota Digital Kasir Pro</title>
   <style>
-    /* RESET & BASE STYLE FOR MOBILE APP SCREEN */
-    * { box-sizing: border-box; }
+    /* ======================================================= */
+    /* MODERN UI LAYAR HP KASIR (TAMPILAN BARU)                 */
+    /* ======================================================= */
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    
     body { 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
-      background-color: #f5f7fa; 
+      background-color: #f8fafc; 
       margin: 0; 
       padding: 0; 
-      color: #333; 
+      color: #1e293b; 
     }
     
     .header-bar { 
-      background-color: #00897b; 
+      background: linear-gradient(135deg, #0f766e, #0d9488);
       color: white; 
-      padding: 15px; 
-      font-size: 18px; 
-      font-weight: bold; 
+      padding: 18px 20px; 
+      font-size: 19px; 
+      font-weight: 700; 
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    
-    .container { 
-      max-width: 100%; 
-      margin: 10px; 
-      background: white; 
-      padding: 15px; 
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
-      border-radius: 8px; 
+
+    .header-bar .subtitle {
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
     }
     
-    .logo-section { text-align: center; margin-bottom: 15px; }
+    .container { 
+      max-width: 500px; 
+      margin: 15px auto; 
+      background: white; 
+      padding: 20px; 
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      border-radius: 16px; 
+      border: 1px solid #f1f5f9;
+    }
+    
+    .logo-section { text-align: center; margin-bottom: 20px; }
     .logo-placeholder { 
-      width: 70px; 
-      height: 70px; 
-      border-radius: 50%; 
-      background: #26a69a; 
-      color: white; 
+      width: 64px; 
+      height: 64px; 
+      border-radius: 14px; 
+      background: #ccfbf1; 
+      color: #0f766e; 
       display: inline-flex; 
       align-items: center; 
       justify-content: center; 
-      font-weight: bold; 
-      font-size: 16px; 
+      font-weight: 800; 
+      font-size: 20px; 
     }
     
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
     .meta-grid { 
       display: grid; 
       grid-template-columns: 1fr; 
-      gap: 10px; 
-      margin-bottom: 15px; 
+      gap: 12px; 
+      margin-bottom: 20px; 
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 12px;
     }
     @media (min-width: 480px) {
       .meta-grid { grid-template-columns: 1fr 1fr; }
     }
     
-    .input-group { margin-bottom: 8px; }
     .input-group label { 
       display: block; 
-      font-size: 12px; 
-      font-weight: bold; 
-      margin-bottom: 4px; 
-      color: #555; 
+      font-size: 11px; 
+      font-weight: 700; 
+      margin-bottom: 6px; 
+      color: #475569; 
     }
     .input-group input { 
       width: 100%; 
-      padding: 10px; 
+      padding: 11px 14px; 
       font-size: 14px; 
-      border: 1px solid #ccc; 
-      border-radius: 6px; 
-      background-color: #fafafa;
+      border: 1px solid #cbd5e1; 
+      border-radius: 8px; 
+      background-color: #fff;
+      color: #1e293b;
+      transition: all 0.2s;
+    }
+    .input-group input:focus {
+      border-color: #0d9488;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+      outline: none;
     }
     
-    .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; }
+    .table-responsive { width: 100%; margin-top: 10px; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { border: 1px solid #e0e0e0; padding: 10px; text-align: left; }
-    th { background-color: #f5f5f5; font-weight: bold; }
+    th, td { padding: 12px 14px; text-align: left; }
+    th { background-color: #f1f5f9; font-weight: 700; color: #475569; border-bottom: 1px solid #e2e8f0; }
+    td { border-bottom: 1px solid #f1f5f9; color: #334155; }
     .text-right { text-align: right; }
     
     .add-form { 
-      background: #e0f2f1; 
-      padding: 12px; 
-      border-radius: 8px; 
-      margin-top: 15px; 
+      background: #f0fdfa; 
+      padding: 16px; 
+      border-radius: 12px; 
+      margin-top: 20px; 
+      border: 1px solid #b2f5ea;
     }
     .add-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 8px;
-      margin-top: 8px;
+      gap: 10px;
+      margin-top: 10px;
     }
     @media (min-width: 400px) {
       .add-grid { grid-template-columns: 2fr 1fr 1.5fr; }
     }
     .add-grid input {
       width: 100%;
-      padding: 10px;
+      padding: 11px;
       font-size: 14px;
-      border: 1px solid #b2dfdb;
-      border-radius: 6px;
+      border: 1px solid #99f6e4;
+      border-radius: 8px;
     }
+    .add-grid input:focus { border-color: #0d9488; outline: none; background: #fff; }
     
     .btn-add { 
-      background-color: #00897b; 
+      background-color: #0d9488; 
       color: white; 
       border: none; 
       width: 100%;
       height: 44px; 
-      border-radius: 6px; 
-      font-size: 16px; 
-      font-weight: bold;
+      border-radius: 8px; 
+      font-size: 14px; 
+      font-weight: 700;
       cursor: pointer; 
-      margin-top: 10px; 
+      margin-top: 12px; 
+      transition: background 0.2s;
     }
+    .btn-add:hover { background-color: #0f766e; }
     
+    .total-box {
+      margin-top: 20px;
+      background: #fef2f2;
+      padding: 16px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #fee2e2;
+    }
+    .total-title { font-size: 13px; font-weight: 700; color: #991b1b; }
+    .total-amount { font-size: 20px; font-weight: 800; color: #dc2626; }
+
     .btn-submit { 
-      background-color: #e65100; 
+      background: linear-gradient(135deg, #ea580c, #c2410c);
       color: white; 
       border: none; 
-      padding: 14px; 
+      padding: 16px; 
       width: 100%; 
-      border-radius: 6px; 
+      border-radius: 10px; 
       font-size: 16px; 
-      font-weight: bold; 
+      font-weight: 700; 
       cursor: pointer; 
-      margin-top: 20px; 
-      min-height: 48px;
+      margin-top: 15px; 
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+      transition: all 0.2s;
     }
-    .btn-submit:disabled { background-color: #9e9e9e; }
-    .footer-note { font-size: 11px; color: #777; text-align: center; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 10px; }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled { background: #cbd5e1; box-shadow: none; cursor: not-allowed; }
+    
+    .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 25px; border-top: 1px dashed #e2e8f0; padding-top: 12px; line-height: 1.5; }
 
-    /* AREA STRUK HIDDEN SECARA DEFAULT DI LAYAR HP KASIR */
+    /* ======================================================= */
+    /* AREA STRUK HIDDEN DI LAYAR HANDPHONE                     */
+    /* ======================================================= */
     #area-cetak-struk { display: none; }
 
     /* ======================================================= */
-    /* PENGATURAN KHUSUS PRINT: MURNI TEKS, SUPER BOLD & BESAR */
+    /* STRUKTURAL PRINT: TEKS MURNI, GEDE & BOLD MAKSIMAL      */
     /* ======================================================= */
     @media print {
       body { background: #fff; color: #000; }
@@ -152,28 +205,27 @@
         display: block !important; 
         width: 54mm; 
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 14px;       /* Ukuran huruf diperbesar agar tulisan besar */
-        font-weight: 900;      /* Ketebalan maksimal (Extra Bold) */
+        font-size: 14px;         /* Huruf teks ukuran besar */
+        font-weight: 900;        /* Ketebalan cetak hitam pekat */
         line-height: 1.4;
         margin: 0;
         padding: 0;
         background: #fff;
         color: #000;
-        text-transform: uppercase; /* Memaksa semua huruf cetak menjadi KAPITAL agar lebih jelas */
+        text-transform: uppercase; /* Otomatis Kapital */
       }
       @page { size: 58mm auto; margin: 0; }
       
-      /* Pembatas menggunakan teks murni */
       .line-print { 
         font-size: 14px;
         font-weight: 900;
-        margin: 5px 0;
+        margin: 6px 0;
         white-space: nowrap;
         overflow: hidden;
       }
       .c-print { text-align: center; font-weight: 900; }
       
-      /* Struktur baris barang murni teks menggunakan sistem flex kanan-kiri (bukan tabel) */
+      /* Struktur Baris Barang Tanpa Komponen Tabel */
       .row-print {
         display: flex;
         justify-content: space-between;
@@ -183,7 +235,7 @@
       .item-name-print {
         font-weight: 900;
         display: block;
-        padding-top: 3px;
+        padding-top: 4px;
       }
     }
   </style>
@@ -191,8 +243,8 @@
 <body>
 
   <div class="header-bar">
-    <div>🧾 Nota Digital</div>
-    <div style="font-size: 13px;">Dodi Jaya Game</div>
+    <div>🧾 Nota Digital Pro</div>
+    <div class="subtitle">Dodi Jaya Game</div>
   </div>
 
   <div class="container">
@@ -200,6 +252,7 @@
       <div class="logo-placeholder">DJG</div>
     </div>
 
+    <span class="section-title">Informasi Pelanggan</span>
     <div class="meta-grid">
       <div>
         <div class="input-group"><label>Kepada :</label><input type="text" id="pelanggan" placeholder="Nama Pelanggan"></div>
@@ -211,31 +264,30 @@
       </div>
     </div>
 
+    <span class="section-title">Daftar Belanja</span>
     <div class="table-responsive">
       <table>
         <thead>
-          <tr><th>Barang</th><th style="width: 45px;">Qty</th><th>Harga</th><th>Total</th></tr>
+          <tr><th>Barang</th><th style="width: 50px;">Qty</th><th>Harga</th><th>Total</th></tr>
         </thead>
         <tbody id="tabel-item"></tbody>
       </table>
     </div>
 
     <div class="add-form">
-      <strong style="font-size: 13px; color: #00796b;">+ Tambah Item Barang</strong>
+      <strong style="font-size: 13px; color: #0f766e; font-weight: 700;">+ Tambah Barang Baru</strong>
       <div class="add-grid">
         <input type="text" id="input-nama" placeholder="Nama Barang">
         <input type="number" id="input-qty" placeholder="Qty" value="1" min="1">
         <input type="number" id="input-harga" placeholder="Harga (Rp)">
       </div>
-      <button class="btn-add" onclick="tambahItemRow()">+ Tambah Item</button>
+      <button class="btn-add" onclick="tambahItemRow()">+ Masukkan ke Daftar</button>
     </div>
 
-    <table style="margin-top: 20px; border: none; width: 100%;">
-      <tr style="font-weight: bold; font-size: 16px;">
-        <td style="border: none; padding: 0;">TOTAL NOTA:</td>
-        <td class="text-right" style="border: none; color: #d84315; padding: 0;" id="grand-total">Rp 0</td>
-      </tr>
-    </table>
+    <div class="total-box">
+      <span class="total-title">TOTAL NOTA</span>
+      <span class="total-amount" id="grand-total">Rp 0</span>
+    </div>
 
     <button class="btn-submit" id="btnProses" onclick="simpanDanCetakNota()">PROSES & CETAK STRUK</button>
     <div class="footer-note">PERHATIAN :<br>Barang yang sudah dibeli tidak dapat dikembalikan / ditukar kecuali ada perjanjian terlebih dahulu.</div>
@@ -244,7 +296,7 @@
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <span style="font-size: 16px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span style="font-size: 17px; font-weight: 900;">DODI JAYA GAME</span><br>
       <span>GUNUNG LAGAN, ACEH SINGKIL</span><br>
       <span id="p-waktu"></span>
     </div>
@@ -262,14 +314,14 @@
     
     <div class="line-print">============================</div>
     
-    <div class="row-print" style="font-size: 15px;">
+    <div class="row-print" style="font-size: 16px;">
       <span>TOTAL:</span>
       <span id="p-grand-total"></span>
     </div>
     
     <div class="line-print">============================</div>
     
-    <div class="c-print" style="margin-top: 5px;">
+    <div class="c-print" style="margin-top: 6px;">
       TERIMA KASIH<br>
       ATAS KUNJUNGAN ANDA
     </div>
@@ -308,10 +360,10 @@
       daftarBarang.forEach(function(item) {
         gTotal += item.total;
         tbody.innerHTML += `<tr>
-          <td>${item.nama}</td>
+          <td><b>${item.nama}</b></td>
           <td>${item.qty}</td>
           <td class="text-right">Rp ${item.harga.toLocaleString('id-ID')}</td>
-          <td class="text-right">Rp ${item.total.toLocaleString('id-ID')}</td>
+          <td class="text-right" style="font-weight:700;">Rp ${item.total.toLocaleString('id-ID')}</td>
         </tr>`;
       });
       document.getElementById('grand-total').innerText = "Rp " + gTotal.toLocaleString('id-ID');
@@ -321,10 +373,10 @@
       if(daftarBarang.length === 0) { alert("Belum ada barang di dalam daftar!"); return; }
       
       var btn = document.getElementById('btnProses');
-      btn.innerText = "Mengirim ke Sheets...";
+      btn.innerText = "MENYIMPAN DATA...";
       btn.disabled = true;
 
-      var pelanggan = document.getElementById('pelanggan').value || "Umum";
+      var pelanggan = document.getElementById('pelanggan').value || "UMUM";
       var paketData = daftarBarang.map(b => ({ nama: b.nama, qty: b.qty, harga: b.harga }));
 
       var urlWebApp = "https://script.google.com/macros/s/AKfycbxofhJcs6THJWJ4afCROQy_8fap9lPY6mA7w0qdUaVprhTZ9uuBQR_F0fcW41HGbgnH/exec";
@@ -347,7 +399,6 @@
           daftarBarang.forEach(function(item) {
             gTotal += item.total;
             
-            // PERUBAHAN UTAMA: Output diganti menjadi blok teks div agar murni dibaca sebagai teks rata kanan-kiri
             pTabel.innerHTML += `
               <span class="item-name-print">${item.nama.toUpperCase()}</span>
               <div class="row-print">
@@ -362,6 +413,7 @@
           setTimeout(function() {
             window.print();
             
+            // Reset Form Kasir
             daftarBarang = [];
             renderTabel();
             document.getElementById('pelanggan').value = "";
