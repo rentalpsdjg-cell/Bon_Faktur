@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Nota Digital Kasir Lite</title>
+  <title>Nota Digital Kasir Lite Micro</title>
   <style>
     /* ======================================================= */
     /* ULTRA-LIGHTWEIGHT MINIMALIST UI (RAM & BATTERY SAVER)   */
@@ -22,7 +22,7 @@
     }
     
     .header-bar { 
-      background-color: #022c22; /* Warna emerald gelap solid (bebas lag gradasi) */
+      background-color: #022c22; 
       color: #f8fafc; 
       padding: 15px; 
       font-size: 18px; 
@@ -169,7 +169,7 @@
     .footer-note { font-size: 11px; color: #94a3b8; text-align: center; margin-top: 18px; line-height: 1.5; }
 
     /* ======================================================= */
-    /* AREA CETAK (PAS 58MM, MURNI TEKS, SUPER BOLD & BESAR)    */
+    /* AREA CETAK (PAS 58MM, TEKS COMPACT & SUPER BOLD)        */
     /* ======================================================= */
     #area-cetak-struk { display: none; }
 
@@ -179,24 +179,34 @@
       
       #area-cetak-struk { 
         display: block !important; 
-        width: 48mm;             
-        max-width: 48mm;
+        width: 46mm;             /* Dipersempit agar benar-benar aman di area cetak kertas 58mm */
+        max-width: 46mm;
         font-family: 'Courier New', Courier, monospace; 
-        font-size: 13px;         
-        font-weight: 900;        
-        line-height: 1.3;
+        font-size: 11px;         /* Ukuran teks diperkecil agar muat banyak dan tidak kepotong */
+        font-weight: 900;        /* Tetap tebal maksimal (Extra Bold) */
+        line-height: 1.2;
         margin: 0 auto;
-        padding: 4mm 1mm;        
+        padding: 3mm 0mm;        
         background: #fff;
         color: #000;
         text-transform: uppercase; 
         overflow: hidden;
       }
       @page { size: 58mm auto; margin: 0; }
-      .line-print { font-size: 13px; font-weight: 900; margin: 5px 0; white-space: nowrap; overflow: hidden; letter-spacing: -0.5px; }
+      
+      /* Garis pembatas disesuaikan dengan ukuran text 11px */
+      .line-print { 
+        font-size: 11px; 
+        font-weight: 900; 
+        margin: 4px 0; 
+        white-space: nowrap; 
+        overflow: hidden; 
+        letter-spacing: -0.2px; 
+      }
+      
       .c-print { text-align: center; font-weight: 900; }
       .row-print { display: flex; justify-content: space-between; font-weight: 900; padding: 1px 0; width: 100%; }
-      .item-name-print { font-weight: 900; display: block; padding-top: 5px; word-wrap: break-word; }
+      .item-name-print { font-weight: 900; display: block; padding-top: 3px; word-wrap: break-word; }
     }
   </style>
 </head>
@@ -230,7 +240,7 @@
       </div>
     </div>
 
-    <div class="card-luxury add-form card-lite">
+    <div class="card-lite add-form">
       <span class="section-title" style="color: #065f46; margin-bottom: 8px;">+ Tambah Barang</span>
       <div class="add-grid">
         <input type="text" id="input-nama" placeholder="Nama Barang">
@@ -251,24 +261,32 @@
 
   <div id="area-cetak-struk">
     <div class="c-print">
-      <span style="font-size: 16px; font-weight: 900;">DODI JAYA GAME</span><br>
-      <span style="font-size: 11px;">GUNUNG LAGAN, ACEH SINGKIL</span><br>
-      <span id="p-waktu" style="font-size: 11px;"></span>
+      <span style="font-size: 14px; font-weight: 900;">DODI JAYA GAME</span><br>
+      <span style="font-size: 10px;">GUNUNG LAGAN, ACEH SINGKIL</span><br>
+      <span id="p-waktu" style="font-size: 10px;"></span>
     </div>
-    <div class="line-print">======================</div>
-    <div style="font-size: 12px; font-weight: 900;">
+    
+    <div class="line-print">===========================</div>
+    
+    <div style="font-size: 11px; font-weight: 900;">
       PELANGGAN: <span id="p-pelanggan"></span><br>
       NO NOTA  : <span id="p-faktur"></span>
     </div>
-    <div class="line-print">======================</div>
+    
+    <div class="line-print">===========================</div>
+    
     <div id="p-tabel-barang"></div>
-    <div class="line-print">======================</div>
-    <div class="row-print" style="font-size: 14px; font-weight: 900;">
+    
+    <div class="line-print">===========================</div>
+    
+    <div class="row-print" style="font-size: 12px; font-weight: 900;">
       <span>TOTAL:</span>
       <span id="p-grand-total"></span>
     </div>
-    <div class="line-print">======================</div>
-    <div class="c-print" style="margin-top: 10px; font-size: 11px; font-weight: 900;">
+    
+    <div class="line-print">===========================</div>
+    
+    <div class="c-print" style="margin-top: 8px; font-size: 10px; font-weight: 900;">
       TERIMA KASIH<br>ATAS KUNJUNGAN ANDA
     </div>
   </div>
